@@ -11,7 +11,7 @@ This application helps users track expenses, manage budgets, analyze spending ha
 ## Frontend Deployment
 
 **Live App:**  
-https://expense-tracker-4i1nl637e-abhishek10299s-projects.vercel.app/
+https://expense-tracker-jet-chi-65.vercel.app/
 
 ---
 
