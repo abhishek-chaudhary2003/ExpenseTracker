@@ -15,9 +15,12 @@ export const deleteExpense= (id)     => http.delete(`/expenses/${id}`);
 
 export const csvDownloadUrl = (params) => {
   const qs = new URLSearchParams(
-    Object.fromEntries(Object.entries(params).filter(([, v]) => v))
+    Object.fromEntries(
+      Object.entries(params).filter(([, v]) => v)
+    )
   ).toString();
-  return `/api/expenses/export.csv${qs ? `?${qs}` : ""}`;
+
+  return `${API_URL}/expenses/export.csv${qs ? `?${qs}` : ""}`;
 };
 
 export const getBudgets   = ()               => http.get("/budgets").then(r => r.data.data);

@@ -73,7 +73,7 @@ export default function ExpenseTable({ expenses, isLoading, onEdit, onDelete }) 
                 <td className="px-4 py-3"><Badge category={e.category} /></td>
                 <td className="px-4 py-3 text-gray-400 max-w-50 truncate">{e.note || "—"}</td>
                 <td className="px-4 py-3">
-                  <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center justify-end gap-2">
                     <button onClick={() => onEdit(e)}
                       className="p-1.5 rounded-lg hover:bg-blue-50 text-gray-400 hover:text-blue-600 transition-colors">
                       <Pencil size={14} />
@@ -90,7 +90,6 @@ export default function ExpenseTable({ expenses, isLoading, onEdit, onDelete }) 
         </table>
       </div>
 
-      {/* Mobile cards */}
       <div className="sm:hidden divide-y divide-gray-50">
         {expenses.map((e) => (
           <div key={e.id} className="p-4">

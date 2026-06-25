@@ -34,7 +34,13 @@ export default function App() {
       <header className="bg-white border-b border-gray-100 sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-sm">RS</div>
+            <div className="w-8 h-8 rounded-xl overflow-hidden">
+  <img
+    src="/logo.png"
+    alt="ExpenseTracker Logo"
+    className="w-full h-full object-cover"
+  />
+</div>
             <span className="font-bold text-gray-800 text-base tracking-tight">ExpenseTracker</span>
           </div>
 
