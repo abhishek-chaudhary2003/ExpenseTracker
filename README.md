@@ -1,4 +1,3 @@
-
 # Expense Tracker
 
 A full-stack expense tracking application built as part of the **Studio Graphene Programme Take-Home Assignment (Exercise 2: Mini Expense Tracker)**.
@@ -12,7 +11,7 @@ This application helps users track expenses, manage budgets, analyze spending ha
 ## Frontend Deployment
 
 **Live App:**  
-https://expense-tracker-6lizlrgog-abhishek10299s-projects.vercel.app/
+https://expense-tracker-4i1nl637e-abhishek10299s-projects.vercel.app/
 
 ---
 
@@ -230,7 +229,7 @@ expense-tracker/
 │   └── package.json
 │
 └── README.md
-````
+```
 
 ---
 
@@ -312,9 +311,9 @@ GET /api/expenses/summary
 
 Returns:
 
-* Total expenses
-* Category totals
-* Dashboard statistics
+- Total expenses
+- Category totals
+- Dashboard statistics
 
 ---
 
@@ -356,8 +355,8 @@ DELETE /api/budgets/:category
 
 ## Prerequisites
 
-* Node.js (v18 or later recommended)
-* npm
+- Node.js (v18 or later recommended)
+- npm
 
 ---
 
@@ -428,37 +427,37 @@ http://localhost:5173
 
 # Performance Optimizations
 
-* React Query caching
-* Optimistic UI updates
-* Efficient API requests
-* Fast client-side filtering
-* Lightweight JSON storage
-* Responsive rendering
+- React Query caching
+- Optimistic UI updates
+- Efficient API requests
+- Fast client-side filtering
+- Lightweight JSON storage
+- Responsive rendering
 
 ---
 
 # What Works
 
-* Expense CRUD operations
-* Expense filtering
-* Expense sorting
-* Budget management
-* Budget progress tracking
-* Dashboard analytics
-* Expense charts
-* CSV export
-* Persistent storage
-* Responsive design
+- Expense CRUD operations
+- Expense filtering
+- Expense sorting
+- Budget management
+- Budget progress tracking
+- Dashboard analytics
+- Expense charts
+- CSV export
+- Persistent storage
+- Responsive design
 
 ---
 
 # Known Limitations
 
-* No authentication system
-* Single-user application
-* JSON storage not suitable for large-scale production use
-* No recurring expenses
-* No automated tests
+- No authentication system
+- Single-user application
+- JSON storage not suitable for large-scale production use
+- No recurring expenses
+- No automated tests
 
 ---
 
@@ -466,15 +465,15 @@ http://localhost:5173
 
 If given more time, I would add:
 
-* User authentication
-* Multi-user support
-* SQLite or PostgreSQL database
-* Recurring expense tracking
-* Budget notifications
-* Dark mode
-* Receipt uploads
-* Automated testing
-* Progressive Web App (PWA)
+- User authentication
+- Multi-user support
+- SQLite or PostgreSQL database
+- Recurring expense tracking
+- Budget notifications
+- Dark mode
+- Receipt uploads
+- Automated testing
+- Progressive Web App (PWA)
 
 ---
 
@@ -487,4 +486,3 @@ AI tools were used for debugging support, implementation guidance, and developme
 # Author
 
 Built by **Abhishek Chaudhary** for the **Studio Graphene Programme Take-Home Assignment**.
-
