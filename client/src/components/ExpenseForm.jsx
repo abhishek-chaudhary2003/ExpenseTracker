@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, Calendar } from "lucide-react";
 import Modal from "./ui/Modal.jsx";
 import { useCreateExpense, useUpdateExpense } from "../hooks/useExpenses.js";
 import { CATEGORIES, todayStr } from "../lib/constants.js";
@@ -119,13 +119,20 @@ export default function ExpenseForm({ editTarget, onClose }) {
         </Field>
 
         <Field label="Date" error={errors.date}>
-          <input
-            type="date"
-            max={todayStr()}
-            className={inputClass("date")}
-            value={form.date}
-            onChange={set("date")}
-          />
+          <div className="relative">
+            <input
+              type="date"
+              max={todayStr()}
+              className={`${inputClass("date")} pr-10`}
+              value={form.date}
+              onChange={set("date")}
+            />
+
+            <Calendar
+              size={18}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+            />
+          </div>
         </Field>
 
         <Field label="Note (optional)">
