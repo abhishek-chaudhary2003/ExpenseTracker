@@ -22,13 +22,22 @@ export default function DeleteConfirm({ expense, onClose }) {
           ? This cannot be undone.
         </div>
         <div className="flex gap-3">
-          <button onClick={onClose}
-            className="flex-1 rounded-xl border border-gray-200 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+          <button
+            onClick={onClose}
+            className="flex-1 rounded-xl border border-gray-200 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+          >
             Cancel
           </button>
-          <button onClick={confirm} disabled={isPending}
-            className="flex-1 rounded-xl bg-red-500 py-2.5 text-sm font-semibold text-white hover:bg-red-600 disabled:opacity-60 transition-colors flex items-center justify-center gap-2">
-            {isPending ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
+          <button
+            onClick={confirm}
+            disabled={isPending}
+            className="flex-1 rounded-xl bg-red-500 py-2.5 text-sm font-semibold text-white hover:bg-red-600 disabled:opacity-60 transition-colors flex items-center justify-center gap-2"
+          >
+            {isPending ? (
+              <Loader2 size={14} className="animate-spin" />
+            ) : (
+              <Trash2 size={14} />
+            )}
             Delete
           </button>
         </div>

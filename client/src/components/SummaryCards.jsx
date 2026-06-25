@@ -9,8 +9,12 @@ function Card({ icon: Icon, iconBg, label, value, sub }) {
         <Icon size={20} className="text-white" />
       </div>
       <div className="min-w-0">
-        <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">{label}</p>
-        <p className="text-2xl font-bold text-gray-800 mt-0.5 truncate">{value}</p>
+        <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+          {label}
+        </p>
+        <p className="text-2xl font-bold text-gray-800 mt-0.5 truncate">
+          {value}
+        </p>
         {sub && <p className="text-xs text-gray-400 mt-1 truncate">{sub}</p>}
       </div>
     </div>
@@ -36,12 +40,17 @@ export default function SummaryCards() {
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[0, 1, 2].map((i) => <SkeletonCard key={i} />)}
+        {[0, 1, 2].map((i) => (
+          <SkeletonCard key={i} />
+        ))}
       </div>
     );
   }
 
-  const topCat = data?.byCategory?.reduce((max, c) => (!max || c.total > max.total ? c : max), null);
+  const topCat = data?.byCategory?.reduce(
+    (max, c) => (!max || c.total > max.total ? c : max),
+    null,
+  );
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -64,7 +73,11 @@ export default function SummaryCards() {
         iconBg="bg-rose-500"
         label="Highest Expense"
         value={data?.highest ? formatCurrency(data.highest.amount) : "—"}
-        sub={data?.highest ? `${data.highest.category} · ${formatDate(data.highest.date)}` : "No data yet"}
+        sub={
+          data?.highest
+            ? `${data.highest.category} · ${formatDate(data.highest.date)}`
+            : "No data yet"
+        }
       />
     </div>
   );

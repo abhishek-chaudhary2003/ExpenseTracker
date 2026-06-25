@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { X } from "lucide-react";
 
 export default function Modal({ title, onClose, children }) {
-
   useEffect(() => {
     const handler = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", handler);

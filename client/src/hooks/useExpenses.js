@@ -1,15 +1,22 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getExpenses, getSummary, createExpense, updateExpense, deleteExpense } from "../lib/api.js";
+import {
+  getExpenses,
+  getSummary,
+  createExpense,
+  updateExpense,
+  deleteExpense,
+} from "../lib/api.js";
+import { toast } from "sonner";
 
 export const KEYS = {
   expenses: (f) => ["expenses", f],
-  summary:  ()  => ["summary"],
+  summary: () => ["summary"],
 };
 
 export function useExpenses(filters) {
   return useQuery({
     queryKey: KEYS.expenses(filters),
-    queryFn:  () => getExpenses(filters),
+    queryFn: () => getExpenses(filters),
     staleTime: 30_000,
     placeholderData: (prev) => prev,
   });
@@ -18,7 +25,7 @@ export function useExpenses(filters) {
 export function useSummary() {
   return useQuery({
     queryKey: KEYS.summary(),
-    queryFn:  getSummary,
+    queryFn: getSummary,
     staleTime: 30_000,
   });
 }
@@ -33,7 +40,13 @@ export function useCreateExpense() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: createExpense,
-    onSuccess:  () => invalidateAll(qc),
+    onSuccess: () => {
+      invalidateAll(qc);
+      toast.success("Expense added successfully");
+    },
+    onError: () => {
+      toast.error("Failed to add expense");
+    },
   });
 }
 
@@ -46,14 +59,25 @@ export function useUpdateExpense() {
       const snap = qc.getQueriesData({ queryKey: ["expenses"] });
       qc.setQueriesData({ queryKey: ["expenses"] }, (old) => {
         if (!old?.data) return old;
-        return { ...old, data: old.data.map((e) => e.id === updated.id ? { ...e, ...updated } : e) };
+        return {
+          ...old,
+          data: old.data.map((e) =>
+            e.id === updated.id ? { ...e, ...updated } : e,
+          ),
+        };
       });
       return { snap };
     },
+
     onError: (_e, _v, ctx) => {
       ctx?.snap?.forEach(([key, val]) => qc.setQueryData(key, val));
+      toast.error("Failed to update expense");
     },
     onSettled: () => invalidateAll(qc),
+    onSuccess: () => {
+      invalidateAll(qc);
+      toast.success("Expense updated successfully");
+    },
   });
 }
 
@@ -66,13 +90,22 @@ export function useDeleteExpense() {
       const snap = qc.getQueriesData({ queryKey: ["expenses"] });
       qc.setQueriesData({ queryKey: ["expenses"] }, (old) => {
         if (!old?.data) return old;
-        return { ...old, data: old.data.filter((e) => e.id !== id), total: old.total - 1 };
+        return {
+          ...old,
+          data: old.data.filter((e) => e.id !== id),
+          total: old.total - 1,
+        };
       });
       return { snap };
     },
     onError: (_e, _v, ctx) => {
       ctx?.snap?.forEach(([key, val]) => qc.setQueryData(key, val));
+      toast.error("Failed to delete expense");
     },
     onSettled: () => invalidateAll(qc),
+    onSuccess: () => {
+      invalidateAll(qc);
+      toast.success("Expense deleted successfully");
+    },
   });
 }

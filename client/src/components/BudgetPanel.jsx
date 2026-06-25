@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { Pencil, Trash2, Check, X } from "lucide-react";
-import { useBudgets, useSetBudget, useDeleteBudget } from "../hooks/useBudgets.js";
+import {
+  useBudgets,
+  useSetBudget,
+  useDeleteBudget,
+} from "../hooks/useBudgets.js";
 import { CATEGORY_META, formatCurrency } from "../lib/constants.js";
 
 function BudgetRow({ item }) {
-  const [editing, setEditing]   = useState(false);
-  const [value,   setValue]     = useState(item.limit ?? "");
-  const setMutation    = useSetBudget();
+  const [editing, setEditing] = useState(false);
+  const [value, setValue] = useState(item.limit ?? "");
+  const setMutation = useSetBudget();
   const deleteMutation = useDeleteBudget();
 
-  const pct     = item.limit ? Math.min((item.spent / item.limit) * 100, 100) : 0;
-  const over    = item.isOverBudget;
-  const meta    = CATEGORY_META[item.category] ?? CATEGORY_META.Other;
-  const barColor = over ? "bg-red-500" : pct > 75 ? "bg-amber-400" : "bg-emerald-400";
+  const pct = item.limit ? Math.min((item.spent / item.limit) * 100, 100) : 0;
+  const over = item.isOverBudget;
+  const meta = CATEGORY_META[item.category] ?? CATEGORY_META.Other;
+  const barColor = over
+    ? "bg-red-500"
+    : pct > 75
+      ? "bg-amber-400"
+      : "bg-emerald-400";
 
   const save = async () => {
     const limit = parseFloat(value);
@@ -26,9 +34,13 @@ function BudgetRow({ item }) {
       <div className="flex items-center justify-between mb-1.5">
         <div className="flex items-center gap-2">
           <span className={`w-2 h-2 rounded-full ${meta.dot}`} />
-          <span className="text-sm font-medium text-gray-700">{item.category}</span>
+          <span className="text-sm font-medium text-gray-700">
+            {item.category}
+          </span>
           {over && (
-            <span className="text-xs bg-red-100 text-red-600 font-medium px-1.5 py-0.5 rounded-full">Over budget</span>
+            <span className="text-xs bg-red-100 text-red-600 font-medium px-1.5 py-0.5 rounded-full">
+              Over budget
+            </span>
           )}
         </div>
 
@@ -43,23 +55,40 @@ function BudgetRow({ item }) {
                 autoFocus
                 onKeyDown={(e) => e.key === "Enter" && save()}
               />
-              <button onClick={save} className="p-1 rounded-lg hover:bg-green-100 text-green-600 transition-colors">
+              <button
+                onClick={save}
+                className="p-1 rounded-lg hover:bg-green-100 text-green-600 transition-colors"
+              >
                 <Check size={14} />
               </button>
-              <button onClick={() => setEditing(false)} className="p-1 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors">
+              <button
+                onClick={() => setEditing(false)}
+                className="p-1 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors"
+              >
                 <X size={14} />
               </button>
             </>
           ) : (
             <>
               <span className="text-xs text-gray-400">
-                {item.limit ? `${formatCurrency(item.spent)} / ${formatCurrency(item.limit)}` : "No limit set"}
+                {item.limit
+                  ? `${formatCurrency(item.spent)} / ${formatCurrency(item.limit)}`
+                  : "No limit set"}
               </span>
-              <button onClick={() => { setValue(item.limit ?? ""); setEditing(true); }} className="p-1 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors">
+              <button
+                onClick={() => {
+                  setValue(item.limit ?? "");
+                  setEditing(true);
+                }}
+                className="p-1 rounded-lg hover:bg-gray-100 text-gray-400 transition-colors"
+              >
                 <Pencil size={13} />
               </button>
               {item.limit && (
-                <button onClick={() => deleteMutation.mutate(item.category)} className="p-1 rounded-lg hover:bg-red-100 text-gray-400 hover:text-red-500 transition-colors">
+                <button
+                  onClick={() => deleteMutation.mutate(item.category)}
+                  className="p-1 rounded-lg hover:bg-red-100 text-gray-400 hover:text-red-500 transition-colors"
+                >
                   <Trash2 size={13} />
                 </button>
               )}
@@ -68,7 +97,7 @@ function BudgetRow({ item }) {
         </div>
       </div>
 
-      {/* Progress bar */}
+
       <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
         {item.limit && (
           <div
@@ -92,7 +121,7 @@ export default function BudgetPanel() {
 
       {isLoading ? (
         <div className="space-y-4 animate-pulse">
-          {[0,1,2].map(i => (
+          {[0, 1, 2].map((i) => (
             <div key={i} className="space-y-1.5">
               <div className="h-3 bg-gray-200 rounded w-24" />
               <div className="h-1.5 bg-gray-200 rounded-full" />
