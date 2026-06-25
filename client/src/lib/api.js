@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const http = axios.create({ baseURL: "/api", timeout: 8000 });
+const API_URL = import.meta.env.VITE_API_URL || "/api";
+
+const http = axios.create({
+  baseURL: API_URL,
+  timeout: 8000,
+});
 
 export const getExpenses  = (params) => http.get("/expenses", { params }).then(r => r.data);
 export const getSummary   = ()       => http.get("/expenses/summary").then(r => r.data);
